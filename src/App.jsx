@@ -45,7 +45,7 @@ function Home({ setView }) {
           { icon: '🧮', title: 'GDD Science',          body: 'Published entomological thresholds — 504 degree-days predicts peak bollworm emergence.' },
           { icon: '📞', title: 'Voice Alert in Hindi', body: 'AI-phrased spoken alert auto-played to the farmer — no app, no literacy required.' },
         ].map(({ icon, title, body }) => (
-          <motion.div key={title} className="home-card" whileHover={{ scale: 1.02, boxShadow: '0 6px 20px rgba(0,0,0,0.12)' }}>
+          <motion.div key={title} className="home-card" whileHover={{ scale: 1.02, boxShadow: '0 6px 20px rgba(30,77,15,0.14)' }}>
             <span className="home-card-icon">{icon}</span>
             <h3>{title}</h3>
             <p>{body}</p>
