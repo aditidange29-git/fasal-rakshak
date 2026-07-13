@@ -8,7 +8,7 @@
 |---|---|---|
 | [Open-Meteo](https://open-meteo.com) | Daily weather (temperature max/min) | Free, no API key |
 | [Gemini API](https://aistudio.google.com/apikey) — `gemini-2.0-flash` | AI phrasing of alert messages | Free tier via AI Studio |
-| [Firebase Firestore](https://firebase.google.com/pricing) — Spark plan | Farmer registration data, alert logs | Free Spark plan |
+| [Supabase](https://supabase.com/pricing) — Free plan | Farmer registration data, alert logs | Free plan (500 MB DB, 50k monthly active users) |
 | Browser Web Speech API (`window.speechSynthesis`) | Text-to-speech voice playback | Built into browser, no key |
 
 ## Rules for adding new services
