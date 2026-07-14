@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { supabase } from '../supabase'
 import { VIDARBHA_DISTRICT_COORDS } from '../lib/weatherClient'
 
@@ -14,9 +15,7 @@ export default function RegistrationForm({ onRegistered }) {
   })
   const [submitting, setSubmitting] = useState(false)
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -24,22 +23,19 @@ export default function RegistrationForm({ onRegistered }) {
     try {
       const coords = VIDARBHA_DISTRICT_COORDS[form.district]
       const { error } = await supabase.from('farmers').insert({
-        farmer_name: form.farmerName,
-        village: form.village,
-        district: form.district,
-        acreage: Number(form.acreage),
-        phone: form.phone,
-        sowing_date: form.sowingDate,
-        registered_by: form.registeredBy,
-        lat: coords.lat,
-        lng: coords.lng,
+        farmer_name:    form.farmerName,
+        village:        form.village,
+        district:       form.district,
+        acreage:        Number(form.acreage),
+        phone:          form.phone,
+        sowing_date:    form.sowingDate,
+        registered_by:  form.registeredBy,
+        lat:            coords.lat,
+        lng:            coords.lng,
       })
       if (error) throw error
       onRegistered?.()
-      setForm({
-        farmerName: '', village: '', district: 'Yavatmal', acreage: '',
-        phone: '', sowingDate: '', registeredBy: 'self',
-      })
+      setForm({ farmerName: '', village: '', district: 'Yavatmal', acreage: '', phone: '', sowingDate: '', registeredBy: 'self' })
     } catch (err) {
       console.error('Registration failed:', err)
       alert('Something went wrong saving the farmer profile. Check console.')
@@ -49,41 +45,74 @@ export default function RegistrationForm({ onRegistered }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="registration-form">
-      <h2>Register a Farmer</h2>
+    <div className="register-page">
+      <motion.form
+        onSubmit={handleSubmit}
+        className="registration-form"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="form-header">
+          <h2>Register a Farmer</h2>
+          <p className="form-subhead">Add a new farmer profile to begin tracking pest risk.</p>
+        </div>
 
-      <label>Farmer name</label>
-      <input name="farmerName" value={form.farmerName} onChange={handleChange} required />
+        <div className="form-group">
+          <label htmlFor="farmerName">Farmer name</label>
+          <input id="farmerName" name="farmerName" value={form.farmerName}
+            onChange={handleChange} placeholder="e.g. Ramesh Patil" required />
+        </div>
 
-      <label>Village</label>
-      <input name="village" value={form.village} onChange={handleChange} required />
+        <div className="form-group">
+          <label htmlFor="village">Village</label>
+          <input id="village" name="village" value={form.village}
+            onChange={handleChange} placeholder="e.g. Wani" required />
+        </div>
 
-      <label>District</label>
-      <select name="district" value={form.district} onChange={handleChange}>
-        {Object.keys(VIDARBHA_DISTRICT_COORDS).map((d) => (
-          <option key={d} value={d}>{d}</option>
-        ))}
-      </select>
+        <div className="form-group">
+          <label htmlFor="district">District</label>
+          <select id="district" name="district" value={form.district} onChange={handleChange}>
+            {Object.keys(VIDARBHA_DISTRICT_COORDS).map((d) => (
+              <option key={d} value={d}>{d}</option>
+            ))}
+          </select>
+        </div>
 
-      <label>Land size (acres)</label>
-      <input name="acreage" type="number" min="0.5" step="0.5" value={form.acreage} onChange={handleChange} required />
+        <div className="form-row">
+          <div className="form-group">
+            <label htmlFor="acreage">Land size (acres)</label>
+            <input id="acreage" name="acreage" type="number" min="0.5" step="0.5"
+              value={form.acreage} onChange={handleChange} placeholder="e.g. 2.5" required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel"
+              value={form.phone} onChange={handleChange} placeholder="e.g. 9876543210" required />
+          </div>
+        </div>
 
-      <label>Phone number</label>
-      <input name="phone" type="tel" value={form.phone} onChange={handleChange} required />
+        <div className="form-group">
+          <label htmlFor="sowingDate">Sowing date</label>
+          <input id="sowingDate" name="sowingDate" type="date"
+            value={form.sowingDate} onChange={handleChange} required />
+        </div>
 
-      <label>Sowing date</label>
-      <input name="sowingDate" type="date" value={form.sowingDate} onChange={handleChange} required />
+        <div className="form-group">
+          <label htmlFor="registeredBy">Registered by</label>
+          <select id="registeredBy" name="registeredBy" value={form.registeredBy} onChange={handleChange}>
+            <option value="self">Farmer (self)</option>
+            <option value="family">Family member</option>
+            <option value="fpo">FPO / Cooperative coordinator</option>
+          </select>
+        </div>
 
-      <label>Registered by</label>
-      <select name="registeredBy" value={form.registeredBy} onChange={handleChange}>
-        <option value="self">Farmer (self)</option>
-        <option value="family">Family member</option>
-        <option value="fpo">FPO / Cooperative coordinator</option>
-      </select>
-
-      <button type="submit" disabled={submitting}>
-        {submitting ? 'Saving...' : 'Register Farmer'}
-      </button>
-    </form>
+        <button type="submit" className="btn-primary btn-submit" disabled={submitting}>
+          {submitting
+            ? <><span className="spinner spinner-sm" aria-hidden="true" /> Saving…</>
+            : 'Register Farmer'}
+        </button>
+      </motion.form>
+    </div>
   )
 }

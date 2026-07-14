@@ -14,17 +14,26 @@ function BilingualSection({ heading, headingHi, en, hi, className = '' }) {
   )
 }
 
+function RoadmapIcon({ type }) {
+  const props = { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' }
+  if (type === 'flask') return <svg {...props}><path d="M9 3h6M9 3v8l-4 9h14l-4-9V3"/></svg>
+  if (type === 'pill') return <svg {...props}><path d="M10.5 2.343L2.343 10.5a4.95 4.95 0 0 0 7 7L21.5 5.657a4.95 4.95 0 0 0-7-7z"/><line x1="8.5" y1="15.5" x2="15.5" y2="8.5"/></svg>
+  if (type === 'book') return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+  if (type === 'building') return <svg {...props}><rect x="3" y="9" width="18" height="13" rx="1"/><path d="M8 22V9"/><path d="M16 22V9"/><path d="M3 9l9-7 9 7"/></svg>
+  if (type === 'phone') return <svg {...props}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.27h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.29 6.29l1.8-1.8a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  return null
+}
+
 export default function About() {
   return (
     <div className="about">
 
-      {/* Language label strip */}
       <div className="bilingual-labels">
-        <span>🇬🇧 English</span>
-        <span>🇮🇳 हिन्दी</span>
+        <span>English</span>
+        <span>हिन्दी</span>
       </div>
 
-      {/* ── Mission ── */}
+      {/* Mission */}
       <BilingualSection
         heading="Our Mission"
         headingHi="हमारा उद्देश्य"
@@ -60,7 +69,7 @@ export default function About() {
         }
       />
 
-      {/* ── GDD Science ── */}
+      {/* GDD Science */}
       <BilingualSection
         heading="The Science: Degree-Days"
         headingHi="विज्ञान: ताप-संचय दिवस (GDD)"
@@ -103,21 +112,20 @@ export default function About() {
               गुलाबी सूँडी (<em>Pectinophora gossypiella</em>) के लिए प्रकाशित आधार-तापमान
               <strong> 13.4 °C</strong> है और <strong>35.5 °C</strong> से ऊपर विकास
               थम जाता है। बुवाई के बाद जब संचित GDD <strong>504</strong> तक पहुँचता है,
-              तो प्रथम पीढ़ी के वयस्क कीटों का प्रकटन चरम पर होता है — फ़सल-संक्रमण
-              की सर्वाधिक जोखिम वाली खिड़की।
+              तो प्रथम पीढ़ी के वयस्क कीटों का प्रकटन चरम पर होता है।
             </p>
             <p>
               फ़सल-रक्षक{' '}
               <a href="https://open-meteo.com" target="_blank" rel="noreferrer">Open-Meteo</a>{' '}
-              से पिछले ३० दिनों का वास्तविक तापमान डेटा प्राप्त करता है (निःशुल्क, कोई
-              API कुंजी नहीं), बुवाई की तिथि से GDD संचय करता है और हालिया औसत दैनिक
-              दर के आधार पर सीमा तक पहुँचने के दिनों का पूर्वानुमान लगाता है।
+              से पिछले ३० दिनों का वास्तविक तापमान डेटा प्राप्त करता है, बुवाई की तिथि
+              से GDD संचय करता है और हालिया औसत दैनिया दर के आधार पर सीमा तक पहुँचने
+              के दिनों का पूर्वानुमान लगाता है।
             </p>
           </>
         }
       />
 
-      {/* ── How We Fit ── */}
+      {/* How We Fit */}
       <BilingualSection
         heading="How We Fit the Existing Landscape"
         headingHi="मौजूदा परिदृश्य में हमारी भूमिका"
@@ -159,30 +167,26 @@ export default function About() {
             <ul className="about-compare">
               <li>
                 <strong>CottonAce (महिन्द्रा)</strong> — सिंचाई, पोषण और बाज़ार-संपर्क
-                को समेटने वाला एक व्यापक कृषि-परामर्श मंच। फ़सल-रक्षक कीट-विशिष्ट और
-                वाचिक-प्रधान है — उन किसानों के लिए जो नियमित रूप से कोई ऐप नहीं खोलते।
+                को समेटने वाला एक व्यापक कृषि-परामर्श मंच।
               </li>
               <li>
                 <strong>CROPSAP (महाराष्ट्र शासन)</strong> — भौतिक जालों से जिला-स्तरीय
-                कीट-दबाव रिपोर्ट तैयार करने वाला खेत-निरीक्षण नेटवर्क। हमारा GDD आधारित
-                मॉडल जाल की संख्या बढ़ने से २–५ दिन पूर्व संकेत देता है।
+                कीट-दबाव रिपोर्ट तैयार करने वाला खेत-निरीक्षण नेटवर्क।
               </li>
               <li>
                 <strong>भारत-विस्तार (ICAR)</strong> — विस्तार-सामग्री के लिए देशव्यापी
-                ज्ञान-प्रसार तंत्र। फ़सल-रक्षक प्रत्येक किसान की बुवाई-तिथि से आबद्ध
-                स्वचालित, व्यक्तिगत, वाचिक चेतावनी देता है — सामूहिक प्रसारण नहीं।
+                ज्ञान-प्रसार तंत्र।
               </li>
             </ul>
             <p>
               इनमें से कोई भी किसान की अपनी बुवाई-तिथि के अनुसार अंशांकित, खेत-विशिष्ट,
-              हिंदी वाचिक चेतावनी सक्रिय रूप से नहीं देता। यही हमारा सीमित किंतु
-              सार्थक योगदान है।
+              हिंदी वाचिक चेतावनी सक्रिय रूप से नहीं देता।
             </p>
           </>
         }
       />
 
-      {/* ── Prototype Disclaimer ── */}
+      {/* Prototype Disclaimer */}
       <BilingualSection
         heading="About This Prototype"
         headingHi="इस प्रारूप के बारे में"
@@ -191,39 +195,35 @@ export default function About() {
           <>
             <p>
               <strong>Call and SMS delivery is simulated in this version.</strong> Real
-              outbound telephony in India requires TRAI DLT (Distributed Ledger Technology)
-              registration — involving a registered business entity, template approval, and
-              a licensed TSP such as Exotel or Ozonetel. This is intentionally deferred
-              while DLT registration is completed in parallel.
+              outbound telephony in India requires TRAI DLT registration — involving a
+              registered business entity, template approval, and a licensed TSP such as
+              Exotel or Ozonetel. This is intentionally deferred while DLT registration
+              is completed in parallel.
             </p>
             <p>
               Weather data is live and real (Open-Meteo). GDD calculations use published
               entomological thresholds. AI message phrasing uses Google Gemini 2.0 Flash
-              (free tier). Farmer data is stored in Supabase (free tier). All core costs
-              are zero.
+              (free tier). Farmer data is stored in Supabase (free tier).
             </p>
           </>
         }
         hi={
           <>
             <p>
-              <strong>इस संस्करण में कॉल और SMS प्रेषण अनुकरण (सिमुलेशन) मात्र है।</strong>{' '}
-              भारत में वास्तविक आउटबाउंड दूरसंचार के लिए TRAI DLT (वितरित बहीखाता
-              प्रौद्योगिकी) पंजीकरण अनिवार्य है — जिसमें पंजीकृत व्यावसायिक संस्था,
-              संदेश-टेम्पलेट का अनुमोदन और लाइसेंसधारी TSP (Exotel/Ozonetel) की
-              भागीदारी शामिल है। DLT पंजीकरण पूर्ण होने तक यह जानबूझकर स्थगित है।
+              <strong>इस संस्करण में कॉल और SMS प्रेषण अनुकरण मात्र है।</strong>{' '}
+              भारत में वास्तविक आउटबाउंड दूरसंचार के लिए TRAI DLT पंजीकरण अनिवार्य है।
+              DLT पंजीकरण पूर्ण होने तक यह जानबूझकर स्थगित है।
             </p>
             <p>
               मौसम डेटा वास्तविक और जीवंत है (Open-Meteo)। GDD गणना प्रकाशित
               कीट-विज्ञान सीमाओं पर आधारित है। AI संदेश निर्माण हेतु Google Gemini 2.0
-              Flash (निःशुल्क स्तर) का उपयोग है। किसान डेटा Supabase (निःशुल्क स्तर)
-              में संग्रहीत है। समस्त मुख्य लागतें शून्य हैं।
+              Flash (निःशुल्क स्तर) का उपयोग है।
             </p>
           </>
         }
       />
 
-      {/* ── Roadmap ── */}
+      {/* Roadmap */}
       <BilingualSection
         heading="Roadmap"
         headingHi="भावी कार्य-योजना"
@@ -234,41 +234,21 @@ export default function About() {
               <span className="roadmap-badge">Future scope — not built yet</span>
             </p>
             <ul className="roadmap-list">
-              <li>
-                <span className="roadmap-icon">🧪</span>
-                <div>
-                  <strong>Multi-pest &amp; multi-crop expansion</strong>
-                  <p>Extend GDD models to whitefly, aphids, and helicoverpa for cotton; and to soybean and tur (pigeon pea).</p>
-                </div>
-              </li>
-              <li>
-                <span className="roadmap-icon">💊</span>
-                <div>
-                  <strong>Spray cost calculator &amp; product recommendation</strong>
-                  <p>Suggest generic-brand pesticides with current market rates based on risk level and acreage.</p>
-                </div>
-              </li>
-              <li>
-                <span className="roadmap-icon">📒</span>
-                <div>
-                  <strong>Season-level expense &amp; income tracking</strong>
-                  <p>Simple input-cost and harvest-income log per farmer, designed for voice or basic-keyboard entry.</p>
-                </div>
-              </li>
-              <li>
-                <span className="roadmap-icon">🏢</span>
-                <div>
-                  <strong>FPO bulk registration &amp; group alerts</strong>
-                  <p>Allow an FPO coordinator to register 50–500 members via CSV and receive consolidated risk reports.</p>
-                </div>
-              </li>
-              <li>
-                <span className="roadmap-icon">📞</span>
-                <div>
-                  <strong>Live outbound call &amp; SMS delivery</strong>
-                  <p>TRAI DLT registration + Exotel/Ozonetel to replace the simulated call with a real automated voice call.</p>
-                </div>
-              </li>
+              {[
+                { type: 'flask',    title: 'Multi-pest & multi-crop expansion',       body: 'Extend GDD models to whitefly, aphids, and helicoverpa for cotton; and to soybean and tur.' },
+                { type: 'pill',     title: 'Spray cost calculator & recommendation',   body: 'Suggest generic-brand pesticides with current market rates based on risk level and acreage.' },
+                { type: 'book',     title: 'Season-level expense & income tracking',   body: 'Simple input-cost and harvest-income log per farmer, designed for voice or basic-keyboard entry.' },
+                { type: 'building', title: 'FPO bulk registration & group alerts',     body: 'Allow an FPO coordinator to register 50–500 members via CSV and receive consolidated risk reports.' },
+                { type: 'phone',    title: 'Live outbound call & SMS delivery',        body: 'TRAI DLT registration + Exotel/Ozonetel to replace the simulated call with a real automated voice call.' },
+              ].map(({ type, title, body }) => (
+                <li key={type}>
+                  <span className="roadmap-icon-wrap"><RoadmapIcon type={type} /></span>
+                  <div>
+                    <strong>{title}</strong>
+                    <p>{body}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </>
         }
@@ -278,41 +258,21 @@ export default function About() {
               <span className="roadmap-badge">भावी विस्तार — अभी निर्मित नहीं</span>
             </p>
             <ul className="roadmap-list">
-              <li>
-                <span className="roadmap-icon">🧪</span>
-                <div>
-                  <strong>बहु-कीट एवं बहु-फ़सल विस्तार</strong>
-                  <p>कपास के लिए श्वेत-मक्खी, माहू और हेलिकोवर्पा; तथा सोयाबीन एवं अरहर (तुर दाल) के लिए GDD मॉडल का विस्तार।</p>
-                </div>
-              </li>
-              <li>
-                <span className="roadmap-icon">💊</span>
-                <div>
-                  <strong>छिड़काव-लागत परिकलक एवं उत्पाद अनुशंसा</strong>
-                  <p>जोखिम स्तर और भूमि-क्षेत्रफल के आधार पर चालू बाज़ार भावों सहित सामान्य (जेनेरिक) कीटनाशकों का सुझाव।</p>
-                </div>
-              </li>
-              <li>
-                <span className="roadmap-icon">📒</span>
-                <div>
-                  <strong>मौसमी व्यय एवं आय का अभिलेख</strong>
-                  <p>प्रति किसान, प्रति मौसम — वाणी या साधारण कीपैड से दर्ज करने योग्य निवेश-लागत और उपज-आय का सरल लेखा।</p>
-                </div>
-              </li>
-              <li>
-                <span className="roadmap-icon">🏢</span>
-                <div>
-                  <strong>FPO सामूहिक पंजीकरण एवं समूह चेतावनी</strong>
-                  <p>FPO समन्वयक द्वारा CSV के माध्यम से ५०–५०० सदस्यों का एक साथ पंजीकरण और पूरे समूह की समेकित जोखिम रिपोर्ट।</p>
-                </div>
-              </li>
-              <li>
-                <span className="roadmap-icon">📞</span>
-                <div>
-                  <strong>वास्तविक आउटबाउंड कॉल एवं SMS प्रेषण</strong>
-                  <p>TRAI DLT पंजीकरण + Exotel/Ozonetel एकीकरण से अनुकरण कॉल को वास्तविक स्वचालित वाचिक कॉल से प्रतिस्थापित करना।</p>
-                </div>
-              </li>
+              {[
+                { type: 'flask',    title: 'बहु-कीट एवं बहु-फ़सल विस्तार',             body: 'कपास के लिए श्वेत-मक्खी, माहू और हेलिकोवर्पा; तथा सोयाबीन एवं अरहर के लिए GDD मॉडल का विस्तार।' },
+                { type: 'pill',     title: 'छिड़काव-लागत परिकलक एवं उत्पाद अनुशंसा',  body: 'जोखिम स्तर और भूमि-क्षेत्रफल के आधार पर चालू बाज़ार भावों सहित सामान्य कीटनाशकों का सुझाव।' },
+                { type: 'book',     title: 'मौसमी व्यय एवं आय का अभिलेख',             body: 'प्रति किसान, प्रति मौसम — वाणी या साधारण कीपैड से दर्ज करने योग्य निवेश-लागत और उपज-आय का सरल लेखा।' },
+                { type: 'building', title: 'FPO सामूहिक पंजीकरण एवं समूह चेतावनी',   body: 'FPO समन्वयक द्वारा CSV के माध्यम से ५०–५०० सदस्यों का एक साथ पंजीकरण।' },
+                { type: 'phone',    title: 'वास्तविक आउटबाउंड कॉल एवं SMS प्रेषण',    body: 'TRAI DLT पंजीकरण + Exotel/Ozonetel एकीकरण से अनुकरण कॉल को वास्तविक कॉल से प्रतिस्थापित करना।' },
+              ].map(({ type, title, body }) => (
+                <li key={type}>
+                  <span className="roadmap-icon-wrap"><RoadmapIcon type={type} /></span>
+                  <div>
+                    <strong>{title}</strong>
+                    <p>{body}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </>
         }

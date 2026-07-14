@@ -1,10 +1,9 @@
 // Shared framer-motion variants used across the app.
-// Keeping them centralised means one tweak updates every page at once.
 
 /** Fade-in + slight upward slide. Use on any top-level page/view mount. */
 export const pageVariants = {
-  hidden:  { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
+  hidden:  { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
 }
 
 /** Staggered child list — parent staggers children by 0.07s each. */
@@ -14,15 +13,15 @@ export const listParent = {
 }
 export const listChild = {
   hidden:  { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0,  transition: { duration: 0.28, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } },
 }
 
-/** Smooth reveal — uses y + opacity only (avoids height:auto framer-motion issues). */
+/** Smooth reveal */
 export const revealVariants = {
   hidden:  { opacity: 0, y: -8 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.28, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0,  transition: { duration: 0.28, ease: 'easeOut' } },
   exit:    { opacity: 0, y: -8, transition: { duration: 0.18 } },
 }
 
-/** Gentle hover scale for buttons and table rows — applied via whileHover. */
+/** Gentle hover scale */
 export const hoverScale = { scale: 1.02, transition: { duration: 0.15 } }
