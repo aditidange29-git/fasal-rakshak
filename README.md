@@ -163,7 +163,20 @@ created_at         timestamptz default now()
 ```
 
 3. Enable Realtime on both tables (Supabase Dashboard → Database → Replication)
-4. Copy your Project URL and anon key into `.env`
+4. Add Row Level Security policies so the anon key can read, write, and delete:
+
+```sql
+-- farmers table
+CREATE POLICY "Allow public select on farmers"  ON public.farmers FOR SELECT TO anon USING (true);
+CREATE POLICY "Allow public insert on farmers"  ON public.farmers FOR INSERT TO anon WITH CHECK (true);
+CREATE POLICY "Allow public delete on farmers"  ON public.farmers FOR DELETE TO anon USING (true);
+
+-- alerts table
+CREATE POLICY "Allow public select on alerts"   ON public.alerts  FOR SELECT TO anon USING (true);
+CREATE POLICY "Allow public insert on alerts"   ON public.alerts  FOR INSERT TO anon WITH CHECK (true);
+```
+
+5. Copy your Project URL and anon key into `.env`
 
 ---
 
